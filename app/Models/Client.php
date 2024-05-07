@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Cliente extends Model
+class Client extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -16,11 +16,11 @@ class Cliente extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'nome',
-        'rua',
-        'numero',
-        'bairro',
-        'complemento',
-        'telefone',
+        'name',
+        'address',
+        'address_no',
+        'address_complement',
+        'neighborhood',
+        'phone',
     ];
 }
