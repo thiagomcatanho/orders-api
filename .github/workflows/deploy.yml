@@ -1,0 +1,33 @@
+name: "Deploy para VPS"
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Baixar codigo"
+        uses: actions/checkout@v4
+
+      - name: "Copiar arquivos para vps"
+        uses: appleboy/scp-actions@v0.1.7
+        with:
+          host: 93.188.161.165
+          username: "root"
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "."
+          target: "/var/www/api"
+      
+      - name: "Build da aplicação"
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 93.188.161.165
+          username: "root"
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/api
+            composer install --no-dev --no-progress -a
+            php artisan optimize
+            chown -R WWW-data:WWW-data .
