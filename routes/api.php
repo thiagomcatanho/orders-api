@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('health-check', fn() => response("It's working!"));
+
 Route::post('register', [RegisterController::class, 'index']);
 
 Route::prefix('auth')
