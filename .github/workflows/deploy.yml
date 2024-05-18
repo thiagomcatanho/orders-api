@@ -14,20 +14,20 @@ jobs:
       - name: "Copiar arquivos para vps"
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: 93.188.161.165
-          username: "root"
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "."
-          target: "/var/www/api"
+          target: "/var/www/api.deposito.eosolutions.com.br"
       
       - name: "Build da aplicação"
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 93.188.161.165
-          username: "root"
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /var/www/api
+            cd /var/www/api.deposito.eosolutions.com.br
             composer install --no-dev --no-progress -a
             php artisan optimize
             chown -R www-data:www-data .
