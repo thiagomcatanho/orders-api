@@ -30,4 +30,4 @@ jobs:
             cd /var/www/api
             composer install --no-dev --no-progress -a
             php artisan optimize
-            chown -R WWW-data:WWW-data .
+            chown -R www-data:www-data .
